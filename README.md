@@ -1,10 +1,76 @@
-# 19年暑假-node
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+  - [参考手册](#%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C)
+  - [node自启动插件](#node%E8%87%AA%E5%90%AF%E5%8A%A8%E6%8F%92%E4%BB%B6)
+  - [~~基本概念~~](#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
+  - [NPM的使用](#npm%E7%9A%84%E4%BD%BF%E7%94%A8)
+  - [~~交互式解释器~~](#%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%A7%A3%E9%87%8A%E5%99%A8)
+  - [~~事件循环~~](#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF)
+  - [模块与包](#%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85)
+  - [全局变量](#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F)
+  - [fs模块](#fs%E6%A8%A1%E5%9D%97)
+  - [http模块](#http%E6%A8%A1%E5%9D%97)
+  - [url模块](#url%E6%A8%A1%E5%9D%97)
+  - [~~querystring模块~~](#querystring%E6%A8%A1%E5%9D%97)
+  - [get与post数据](#get%E4%B8%8Epost%E6%95%B0%E6%8D%AE)
+  - [~~formidable模块~~](#formidable%E6%A8%A1%E5%9D%97)
+  - [ejs模块](#ejs%E6%A8%A1%E5%9D%97)
+  - [art-template模块](#art-template%E6%A8%A1%E5%9D%97)
+  - [express中使用art-template](#express%E4%B8%AD%E4%BD%BF%E7%94%A8art-template)
+  - [ajax-javascript](#ajax-javascript)
+  - [ajax-jQuery](#ajax-jquery)
+  - [mime查询表](#mime%E6%9F%A5%E8%AF%A2%E8%A1%A8)
+- [mongoDB](#mongodb)
+  - [node代码如何连接数据库](#node%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93)
+  - [基本案例](#%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B)
+  - [增加数据](#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE)
+  - [查询数据](#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE)
+  - [更新数据](#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE)
+  - [删除数据](#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE)
+  - [补充：根据`_id`操作](#%E8%A1%A5%E5%85%85%E6%A0%B9%E6%8D%AE_id%E6%93%8D%E4%BD%9C)
+- [express](#express)
+  - [说明](#%E8%AF%B4%E6%98%8E)
+  - [概念问题](#%E6%A6%82%E5%BF%B5%E9%97%AE%E9%A2%98)
+  - [基本使用](#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
+    - [request](#request)
+    - [response](#response)
+  - [获取get提交的数据](#%E8%8E%B7%E5%8F%96get%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE)
+  - [获取post提交的数据](#%E8%8E%B7%E5%8F%96post%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE)
+  - [静态路由](#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1)
+  - [app.Router](#approuter)
+  - [解决跨域问题](#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98)
+  - [使用art-template模板](#%E4%BD%BF%E7%94%A8art-template%E6%A8%A1%E6%9D%BF)
+- [koa](#koa)
+  - [说明](#%E8%AF%B4%E6%98%8E-1)
+  - [基本使用](#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-1)
+  - [ctx&ctx.request&ctx.response](#ctxctxrequestctxresponse)
+  - [获取get提交的数据](#%E8%8E%B7%E5%8F%96get%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE-1)
+  - [获取post提交的数据](#%E8%8E%B7%E5%8F%96post%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE-1)
+  - [路由代理](#%E8%B7%AF%E7%94%B1%E4%BB%A3%E7%90%86)
+  - [静态路由](#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1-1)
+  - [解决跨域问题](#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-1)
+- [promise](#promise)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 参考手册
 
 http://nodejs.cn/api/
 
-## 基本概念
+## node自启动插件
+
+> 在没有使用sublim中启动服务器之前，我们都是用命令台`node index.js`启动服务，太麻烦。这里推荐一个自启动插件，一旦启动之后，代码每次更改保存服务都会自动重启。
+
+```javascript
+//全局安装插件 nodemon
+npm i nodemon -g
+//以后使用nodemon 代替 node 命令运行js文件
+nodemon index.js
+```
+
+## ~~基本概念~~
 
 - node.js是运行在服务器端的javascript
 - node.js是基于v8引擎的平台
@@ -33,7 +99,7 @@ npm publish
   - 安装相关包 `npm i -g cnpm --registry=https://registry.npm.taobao.org`
   - 使用`cnpm`代替`npm`进行包管理
 
-## 交互式解释器
+## ~~交互式解释器~~
 
 > node自带的一个类似于window命令台的系统，可以实现：读取、执行、输出、循环
 
@@ -41,18 +107,118 @@ npm publish
 
 ```
 tab 列出内置对象
-.htlp 列出当前可用命令
+.help 列出当前可用命令
 .break 退出多行表达式
 .clear 退出多行表达式
 .save filename 保存代码到文件
 .load filename 加载文件中的代码
 ```
 
+## ~~事件循环~~
+
+- node中几乎所有的API都是支持回调函数的，也就是基于事件监听。
+- 自定义事件并触发（能力有限，没发现实际用处）
+
+```javascript
+var events = require("events");
+var myEmitter = new events.EventEmitter();
+//注册事件
+myEmitter.on("myevent",function(){})
+//触发事件
+myEmitter.emit("myevent");
+```
+
+- `EventEmitter`属性:不用介绍，一眼识破
+
+```javascript
+addListener(event,listener)
+on(event,listener)
+once(event,listener)
+removeListener(event,listener)
+removeAllLiteners([event])
+setMaxListeners(n)
+listeners(event)
+emit(event,arg1,arg2)
+```
+
+
+
 ## 模块与包
 
-使用exports+require实现js文件间的数据互通。
+> 使用exports+require实现js文件间的数据互通。
+
+- 使用方式
+
+```javascript
+/*主程序：server.js
+ 		1、用来开启服务及加载各个模块代码
+ 		2、使用require()加载其他模块，会直接获取被加载模块的exports变量
+ 		3、模块化开发的最终目的，主程序只负责分配任务，具体的逻辑都是调用其他模块完成。
+ */
+
+ var demo = require("./demo.js") //此时demo 就等于 demo.js的exports
+ /*
+	demo = exports = {
+		obj：{
+			age:18,
+			name:"sc"
+		}
+	}
+ */
+ console.log(demo.obj.age) //18
+ console.log(demo.obj.name)//sc
+```
+
+```javascript
+/*模块程序：demo.js
+		用来实现具体业务
+*/
+// 声明任意数据
+var obj = {
+	age:18,
+	name:"sc"
+}
+// 将数据存储或赋值给内置变量exports
+exports.obj = obj;	// module.exports = obj;
+```
+
+其他内容：
+
+```javascript
+/*
+	包（模块）的加载顺序：内置模块----第三方模块----自定义模块
+
+	下载的第三方包全部会放在node_module文件夹中（会自动帮你创建）
+	
+	注意：引入内置模块和第三方模块时都可以直接写名称，自定义模块就必须写路径
+*/
+```
+
+
 
 ## 全局变量
+
+```javascript
+__dirname
+__filename
+global
+```
+
+## fs模块
+
+```javascript
+fs.
+```
+
+> api实在懒得写
+>
+> **注意事项：：：：：：：：**
+>
+> ​	1、 **fs的文件读取路径，被设计为相对于主程序。**
+>
+> ​		**也就是说就算是在其他模块中读取文件，如果路径写的是相对路径，相对的是主程序文件。**
+>
+> ​	2、**开发中直接使用fs模块的概率很小**
 
 ## http模块
 
@@ -64,6 +230,9 @@ var url = require("url");//解析url字符串为url对象
 var querystring = require("querystring");//解析查询字符串为对象
 
 var server = http.createServer(function(request,response){
+    console.log(request.socket.remoteAddress)
+	console.log(request.socket.remotePort)
+    var userIP = request.connection.remoteAddress;//获取客户端ip
     var reqUrl = request.url;//获取请求的url
 	var reqMethod = request.method;//获取请求的方式
     
@@ -72,11 +241,15 @@ var server = http.createServer(function(request,response){
 	response.writeHead(200, "ok", {
 		"Content-Type":"text/plain;charset=utf8"
 	})
-	// 也是设置响应头
+	// 设置响应头
 
 	/*response.statusCode = 200;
 	response.setHeader("Content-Type", "text/plain;charset=utf8");*/
 	
+    //重定向:http 没有直接提供重定向的api
+    res.writeHead(302,{
+            'Location': 'http://127.0.0.1:8080/login'
+    })
 	// 响应信息
 	response.write("访问服务器成功");
 	response.end("success");
@@ -112,7 +285,7 @@ var server = http.createServer(function(request,response){
 
 
 
-## querystring模块
+## ~~querystring模块~~
 
 ```
 	---
@@ -143,7 +316,7 @@ var server = http.createServer(function(request,response){
 	})
 ```
 
-## formidable模块
+## ~~formidable模块~~
 
 - 作用为处理表单请求，获取表单提交的数据及文件。
 
@@ -229,8 +402,75 @@ var path = require("path");//处理文件路径
 
 ## art-template模块
 
-- 作用为使用模板数据
-- 需要配合`express-art-template`使用
+[官方文档][https://aui.github.io/art-template/zh-cn/docs/index.html]
+
+- 模板基础语法：具体的去查api，我就写几个常用的。
+
+```javascript
+//文本输出
+{{value}} //不会编译html
+{{@ value}}//会编译html
+ //条件语句
+{{if value}} ... {{/if}}
+{{if v1}} ... {{else if v2}} ... {{/if}}
+ //循环语句
+{{each target}}
+    {{$index}} {{$value}}
+{{/each}}                                 
+```
+
+- 使用方式：具体查api。我也只写一种，前后台使用方式一样。
+
+```javascript
+var data = "<h1>{{value}}</h1>"
+	data = template.render(data,{value:123})//"<h1>123</h1>"
+```
+
+## express中使用art-template
+
+- 下载（这个会自动引入，不需要手动引入）
+
+```javascript
+npm install --save art-template
+npm install --save express-art-template
+```
+
+- 配置：使用express-art-template作为中间件渲染art格式的文件
+
+```javascript
+app.engine('art', require('express-art-template'));
+//参数配置，可以不做
+//app.set('view options', {
+//    debug: process.env.NODE_ENV !== 'production'
+//});
+//理解之后，就可以这么干
+//app.engine('html', require('express-art-template'));
+```
+
+- 使用：配置之后就可以使用render函数
+
+```javascript
+res.render('index.art', {
+        user: {
+            name: 'aui',
+            tags: ['art', 'template', 'nodejs']
+        }
+    });
+```
+
+```javascript
+注意：
+	1、文件不写路径，默认渲染根目录下views文件下的文件，直接文件名即可
+    2、网页文件的后缀要改为.art
+```
+
+- 更改默认渲染文件目录:除非太闲，不然不要改
+
+```javascript
+app.set("views","__dirname/public")
+```
+
+
 
 ## ajax-javascript
 
@@ -305,492 +545,9 @@ $.ajax({
 
 - data ：可以是拼接好的字符串  ,如果不是，jquery会自动将数据转化为查询字符串=所以可以是 string/ {}
 
-## mime查询biao
+## mime查询表
 
-{ ".323":"text/h323" ,
-  ".3gp":"video/3gpp" ,
-  ".aab":"application/x-authoware-bin" ,
-  ".aam":"application/x-authoware-map" ,
-  ".aas":"application/x-authoware-seg" ,
-  ".acx":"application/internet-property-stream" ,
-  ".ai":"application/postscript" ,
-  ".aif":"audio/x-aiff" ,
-  ".aifc":"audio/x-aiff" ,
-  ".aiff":"audio/x-aiff" ,
-  ".als":"audio/X-Alpha5" ,
-  ".amc":"application/x-mpeg" ,
-  ".ani":"application/octet-stream" ,
-  ".apk":"application/vnd.android.package-archive" ,
-  ".asc":"text/plain" ,
-  ".asd":"application/astound" ,
-  ".asf":"video/x-ms-asf" ,
-  ".asn":"application/astound" ,
-  ".asp":"application/x-asap" ,
-  ".asr":"video/x-ms-asf" ,
-  ".asx":"video/x-ms-asf" ,
-  ".au":"audio/basic" ,
-  ".avb":"application/octet-stream" ,
-  ".avi":"video/x-msvideo" ,
-  ".awb":"audio/amr-wb" ,
-  ".axs":"application/olescript" ,
-  ".bas":"text/plain" ,
-  ".bcpio":"application/x-bcpio" ,
-  ".bin ":"application/octet-stream" ,
-  ".bld":"application/bld" ,
-  ".bld2":"application/bld2" ,
-  ".bmp":"image/bmp" ,
-  ".bpk":"application/octet-stream" ,
-  ".bz2":"application/x-bzip2" ,
-  ".c":"text/plain" ,
-  ".cal":"image/x-cals" ,
-  ".cat":"application/vnd.ms-pkiseccat" ,
-  ".ccn":"application/x-cnc" ,
-  ".cco":"application/x-cocoa" ,
-  ".cdf":"application/x-cdf" ,
-  ".cer":"application/x-x509-ca-cert" ,
-  ".cgi":"magnus-internal/cgi" ,
-  ".chat":"application/x-chat" ,
-  ".class":"application/octet-stream" ,
-  ".clp":"application/x-msclip" ,
-  ".cmx":"image/x-cmx" ,
-  ".co":"application/x-cult3d-object" ,
-  ".cod":"image/cis-cod" ,
-  ".conf":"text/plain" ,
-  ".cpio":"application/x-cpio" ,
-  ".cpp":"text/plain" ,
-  ".cpt":"application/mac-compactpro" ,
-  ".crd":"application/x-mscardfile" ,
-  ".crl":"application/pkix-crl" ,
-  ".crt":"application/x-x509-ca-cert" ,
-  ".csh":"application/x-csh" ,
-  ".csm":"chemical/x-csml" ,
-  ".csml":"chemical/x-csml" ,
-  ".css":"text/css" ,
-  ".cur":"application/octet-stream" ,
-  ".dcm":"x-lml/x-evm" ,
-  ".dcr":"application/x-director" ,
-  ".dcx":"image/x-dcx" ,
-  ".der":"application/x-x509-ca-cert" ,
-  ".dhtml":"text/html" ,
-  ".dir":"application/x-director" ,
-  ".dll":"application/x-msdownload" ,
-  ".dmg":"application/octet-stream" ,
-  ".dms":"application/octet-stream" ,
-  ".doc":"application/msword" ,
-  ".docx":"application/vnd.openxmlformats-officedocument.wordprocessingml.document" ,
-  ".dot":"application/msword" ,
-  ".dvi":"application/x-dvi" ,
-  ".dwf":"drawing/x-dwf" ,
-  ".dwg":"application/x-autocad" ,
-  ".dxf":"application/x-autocad" ,
-  ".dxr":"application/x-director" ,
-  ".ebk":"application/x-expandedbook" ,
-  ".emb":"chemical/x-embl-dl-nucleotide" ,
-  ".embl":"chemical/x-embl-dl-nucleotide" ,
-  ".eps":"application/postscript" ,
-  ".epub":"application/epub+zip" ,
-  ".eri":"image/x-eri" ,
-  ".es":"audio/echospeech" ,
-  ".esl":"audio/echospeech" ,
-  ".etc":"application/x-earthtime" ,
-  ".etx":"text/x-setext" ,
-  ".evm":"x-lml/x-evm" ,
-  ".evy":"application/envoy" ,
-  ".exe":"application/octet-stream" ,
-  ".fh4":"image/x-freehand" ,
-  ".fh5":"image/x-freehand" ,
-  ".fhc":"image/x-freehand" ,
-  ".fif":"application/fractals" ,
-  ".flr":"x-world/x-vrml" ,
-  ".flv":"flv-application/octet-stream" ,
-  ".fm":"application/x-maker" ,
-  ".fpx":"image/x-fpx" ,
-  ".fvi":"video/isivideo" ,
-  ".gau":"chemical/x-gaussian-input" ,
-  ".gca":"application/x-gca-compressed" ,
-  ".gdb":"x-lml/x-gdb" ,
-  ".gif":"image/gif" ,
-  ".gps":"application/x-gps" ,
-  ".gtar":"application/x-gtar" ,
-  ".gz":"application/x-gzip" ,
-  ".h":"text/plain" ,
-  ".hdf":"application/x-hdf" ,
-  ".hdm":"text/x-hdml" ,
-  ".hdml":"text/x-hdml" ,
-  ".hlp":"application/winhlp" ,
-  ".hqx":"application/mac-binhex40" ,
-  ".hta":"application/hta" ,
-  ".htc":"text/x-component" ,
-  ".htm":"text/html" ,
-  ".html":"text/html" ,
-  ".hts":"text/html" ,
-  ".htt":"text/webviewhtml" ,
-  ".ice":"x-conference/x-cooltalk" ,
-  ".ico":"image/x-icon" ,
-  ".ief":"image/ief" ,
-  ".ifm":"image/gif" ,
-  ".ifs":"image/ifs" ,
-  ".iii":"application/x-iphone" ,
-  ".imy":"audio/melody" ,
-  ".ins":"application/x-internet-signup" ,
-  ".ips":"application/x-ipscript" ,
-  ".ipx":"application/x-ipix" ,
-  ".isp":"application/x-internet-signup" ,
-  ".it":"audio/x-mod" ,
-  ".itz":"audio/x-mod" ,
-  ".ivr":"i-world/i-vrml" ,
-  ".j2k":"image/j2k" ,
-  ".jad":"text/vnd.sun.j2me.app-descriptor" ,
-  ".jam":"application/x-jam" ,
-  ".jar":"application/java-archive" ,
-  ".java":"text/plain" ,
-  ".jfif":"image/pipeg" ,
-  ".jnlp":"application/x-java-jnlp-file" ,
-  ".jpe":"image/jpeg" ,
-  ".jpeg":"image/jpeg" ,
-  ".jpg":"image/jpeg" ,
-  ".jpz":"image/jpeg" ,
-  ".js":"application/x-javascript" ,
-  ".jwc":"application/jwc" ,
-  ".kjx":"application/x-kjx" ,
-  ".lak":"x-lml/x-lak" ,
-  ".latex":"application/x-latex" ,
-  ".lcc":"application/fastman" ,
-  ".lcl":"application/x-digitalloca" ,
-  ".lcr":"application/x-digitalloca" ,
-  ".lgh":"application/lgh" ,
-  ".lha":"application/octet-stream" ,
-  ".lml":"x-lml/x-lml" ,
-  ".lmlpack":"x-lml/x-lmlpack" ,
-  ".log":"text/plain" ,
-  ".lsf":"video/x-la-asf" ,
-  ".lsx":"video/x-la-asf" ,
-  ".lzh":"application/octet-stream" ,
-  ".m13":"application/x-msmediaview" ,
-  ".m14":"application/x-msmediaview" ,
-  ".m15":"audio/x-mod" ,
-  ".m3u":"audio/x-mpegurl" ,
-  ".m3url":"audio/x-mpegurl" ,
-  ".m4a":"audio/mp4a-latm" ,
-  ".m4b":"audio/mp4a-latm" ,
-  ".m4p":"audio/mp4a-latm" ,
-  ".m4u":"video/vnd.mpegurl" ,
-  ".m4v":"video/x-m4v" ,
-  ".ma1":"audio/ma1" ,
-  ".ma2":"audio/ma2" ,
-  ".ma3":"audio/ma3" ,
-  ".ma5":"audio/ma5" ,
-  ".man":"application/x-troff-man" ,
-  ".map":"magnus-internal/imagemap" ,
-  ".mbd":"application/mbedlet" ,
-  ".mct":"application/x-mascot" ,
-  ".mdb":"application/x-msaccess" ,
-  ".mdz":"audio/x-mod" ,
-  ".me":"application/x-troff-me" ,
-  ".mel":"text/x-vmel" ,
-  ".mht":"message/rfc822" ,
-  ".mhtml":"message/rfc822" ,
-  ".mi":"application/x-mif" ,
-  ".mid":"audio/mid" ,
-  ".midi":"audio/midi" ,
-  ".mif":"application/x-mif" ,
-  ".mil":"image/x-cals" ,
-  ".mio":"audio/x-mio" ,
-  ".mmf":"application/x-skt-lbs" ,
-  ".mng":"video/x-mng" ,
-  ".mny":"application/x-msmoney" ,
-  ".moc":"application/x-mocha" ,
-  ".mocha":"application/x-mocha" ,
-  ".mod":"audio/x-mod" ,
-  ".mof":"application/x-yumekara" ,
-  ".mol":"chemical/x-mdl-molfile" ,
-  ".mop":"chemical/x-mopac-input" ,
-  ".mov":"video/quicktime" ,
-  ".movie":"video/x-sgi-movie" ,
-  ".mp2":"video/mpeg" ,
-  ".mp3":"audio/mpeg" ,
-  ".mp4":"video/mp4" ,
-  ".mpa":"video/mpeg" ,
-  ".mpc":"application/vnd.mpohun.certificate" ,
-  ".mpe":"video/mpeg" ,
-  ".mpeg":"video/mpeg" ,
-  ".mpg":"video/mpeg" ,
-  ".mpg4":"video/mp4" ,
-  ".mpga":"audio/mpeg" ,
-  ".mpn":"application/vnd.mophun.application" ,
-  ".mpp":"application/vnd.ms-project" ,
-  ".mps":"application/x-mapserver" ,
-  ".mpv2":"video/mpeg" ,
-  ".mrl":"text/x-mrml" ,
-  ".mrm":"application/x-mrm" ,
-  ".ms":"application/x-troff-ms" ,
-  ".msg":"application/vnd.ms-outlook" ,
-  ".mts":"application/metastream" ,
-  ".mtx":"application/metastream" ,
-  ".mtz":"application/metastream" ,
-  ".mvb":"application/x-msmediaview" ,
-  ".mzv":"application/metastream" ,
-  ".nar":"application/zip" ,
-  ".nbmp":"image/nbmp" ,
-  ".nc":"application/x-netcdf" ,
-  ".ndb":"x-lml/x-ndb" ,
-  ".ndwn":"application/ndwn" ,
-  ".nif":"application/x-nif" ,
-  ".nmz":"application/x-scream" ,
-  ".nokia-op-logo":"image/vnd.nok-oplogo-color" ,
-  ".npx":"application/x-netfpx" ,
-  ".nsnd":"audio/nsnd" ,
-  ".nva":"application/x-neva1" ,
-  ".nws":"message/rfc822" ,
-  ".oda":"application/oda" ,
-  ".ogg":"audio/ogg" ,
-  ".oom":"application/x-AtlasMate-Plugin" ,
-  ".p10":"application/pkcs10" ,
-  ".p12":"application/x-pkcs12" ,
-  ".p7b":"application/x-pkcs7-certificates" ,
-  ".p7c":"application/x-pkcs7-mime" ,
-  ".p7m":"application/x-pkcs7-mime" ,
-  ".p7r":"application/x-pkcs7-certreqresp" ,
-  ".p7s":"application/x-pkcs7-signature" ,
-  ".pac":"audio/x-pac" ,
-  ".pae":"audio/x-epac" ,
-  ".pan":"application/x-pan" ,
-  ".pbm":"image/x-portable-bitmap" ,
-  ".pcx":"image/x-pcx" ,
-  ".pda":"image/x-pda" ,
-  ".pdb":"chemical/x-pdb" ,
-  ".pdf":"application/pdf" ,
-  ".pfr":"application/font-tdpfr" ,
-  ".pfx":"application/x-pkcs12" ,
-  ".pgm":"image/x-portable-graymap" ,
-  ".pict":"image/x-pict" ,
-  ".pko":"application/ynd.ms-pkipko" ,
-  ".pm":"application/x-perl" ,
-  ".pma":"application/x-perfmon" ,
-  ".pmc":"application/x-perfmon" ,
-  ".pmd":"application/x-pmd" ,
-  ".pml":"application/x-perfmon" ,
-  ".pmr":"application/x-perfmon" ,
-  ".pmw":"application/x-perfmon" ,
-  ".png":"image/png" ,
-  ".pnm":"image/x-portable-anymap" ,
-  ".pnz":"image/png" ,
-  ".pot,":"application/vnd.ms-powerpoint" ,
-  ".ppm":"image/x-portable-pixmap" ,
-  ".pps":"application/vnd.ms-powerpoint" ,
-  ".ppt":"application/vnd.ms-powerpoint" ,
-  ".pptx":"application/vnd.openxmlformats-officedocument.presentationml.presentation" ,
-  ".pqf":"application/x-cprplayer" ,
-  ".pqi":"application/cprplayer" ,
-  ".prc":"application/x-prc" ,
-  ".prf":"application/pics-rules" ,
-  ".prop":"text/plain" ,
-  ".proxy":"application/x-ns-proxy-autoconfig" ,
-  ".ps":"application/postscript" ,
-  ".ptlk":"application/listenup" ,
-  ".pub":"application/x-mspublisher" ,
-  ".pvx":"video/x-pv-pvx" ,
-  ".qcp":"audio/vnd.qcelp" ,
-  ".qt":"video/quicktime" ,
-  ".qti":"image/x-quicktime" ,
-  ".qtif":"image/x-quicktime" ,
-  ".r3t":"text/vnd.rn-realtext3d" ,
-  ".ra":"audio/x-pn-realaudio" ,
-  ".ram":"audio/x-pn-realaudio" ,
-  ".rar":"application/octet-stream" ,
-  ".ras":"image/x-cmu-raster" ,
-  ".rc":"text/plain" ,
-  ".rdf":"application/rdf+xml" ,
-  ".rf":"image/vnd.rn-realflash" ,
-  ".rgb":"image/x-rgb" ,
-  ".rlf":"application/x-richlink" ,
-  ".rm":"audio/x-pn-realaudio" ,
-  ".rmf":"audio/x-rmf" ,
-  ".rmi":"audio/mid" ,
-  ".rmm":"audio/x-pn-realaudio" ,
-  ".rmvb":"audio/x-pn-realaudio" ,
-  ".rnx":"application/vnd.rn-realplayer" ,
-  ".roff":"application/x-troff" ,
-  ".rp":"image/vnd.rn-realpix" ,
-  ".rpm":"audio/x-pn-realaudio-plugin" ,
-  ".rt":"text/vnd.rn-realtext" ,
-  ".rte":"x-lml/x-gps" ,
-  ".rtf":"application/rtf" ,
-  ".rtg":"application/metastream" ,
-  ".rtx":"text/richtext" ,
-  ".rv":"video/vnd.rn-realvideo" ,
-  ".rwc":"application/x-rogerwilco" ,
-  ".s3m":"audio/x-mod" ,
-  ".s3z":"audio/x-mod" ,
-  ".sca":"application/x-supercard" ,
-  ".scd":"application/x-msschedule" ,
-  ".sct":"text/scriptlet" ,
-  ".sdf":"application/e-score" ,
-  ".sea":"application/x-stuffit" ,
-  ".setpay":"application/set-payment-initiation" ,
-  ".setreg":"application/set-registration-initiation" ,
-  ".sgm":"text/x-sgml" ,
-  ".sgml":"text/x-sgml" ,
-  ".sh":"application/x-sh" ,
-  ".shar":"application/x-shar" ,
-  ".shtml":"magnus-internal/parsed-html" ,
-  ".shw":"application/presentations" ,
-  ".si6":"image/si6" ,
-  ".si7":"image/vnd.stiwap.sis" ,
-  ".si9":"image/vnd.lgtwap.sis" ,
-  ".sis":"application/vnd.symbian.install" ,
-  ".sit":"application/x-stuffit" ,
-  ".skd":"application/x-Koan" ,
-  ".skm":"application/x-Koan" ,
-  ".skp":"application/x-Koan" ,
-  ".skt":"application/x-Koan" ,
-  ".slc":"application/x-salsa" ,
-  ".smd":"audio/x-smd" ,
-  ".smi":"application/smil" ,
-  ".smil":"application/smil" ,
-  ".smp":"application/studiom" ,
-  ".smz":"audio/x-smd" ,
-  ".snd":"audio/basic" ,
-  ".spc":"application/x-pkcs7-certificates" ,
-  ".spl":"application/futuresplash" ,
-  ".spr":"application/x-sprite" ,
-  ".sprite":"application/x-sprite" ,
-  ".sdp":"application/sdp" ,
-  ".spt":"application/x-spt" ,
-  ".src":"application/x-wais-source" ,
-  ".sst":"application/vnd.ms-pkicertstore" ,
-  ".stk":"application/hyperstudio" ,
-  ".stl":"application/vnd.ms-pkistl" ,
-  ".stm":"text/html" ,
-  ".svg":"image/svg+xml" ,
-  ".sv4cpio":"application/x-sv4cpio" ,
-  ".sv4crc":"application/x-sv4crc" ,
-  ".svf":"image/vnd" ,
-  ".svg":"image/svg+xml" ,
-  ".svh":"image/svh" ,
-  ".svr":"x-world/x-svr" ,
-  ".swf":"application/x-shockwave-flash" ,
-  ".swfl":"application/x-shockwave-flash" ,
-  ".t":"application/x-troff" ,
-  ".tad":"application/octet-stream" ,
-  ".talk":"text/x-speech" ,
-  ".tar":"application/x-tar" ,
-  ".taz":"application/x-tar" ,
-  ".tbp":"application/x-timbuktu" ,
-  ".tbt":"application/x-timbuktu" ,
-  ".tcl":"application/x-tcl" ,
-  ".tex":"application/x-tex" ,
-  ".texi":"application/x-texinfo" ,
-  ".texinfo":"application/x-texinfo" ,
-  ".tgz":"application/x-compressed" ,
-  ".thm":"application/vnd.eri.thm" ,
-  ".tif":"image/tiff" ,
-  ".tiff":"image/tiff" ,
-  ".tki":"application/x-tkined" ,
-  ".tkined":"application/x-tkined" ,
-  ".toc":"application/toc" ,
-  ".toy":"image/toy" ,
-  ".tr":"application/x-troff" ,
-  ".trk":"x-lml/x-gps" ,
-  ".trm":"application/x-msterminal" ,
-  ".tsi":"audio/tsplayer" ,
-  ".tsp":"application/dsptype" ,
-  ".tsv":"text/tab-separated-values" ,
-  ".ttf":"application/octet-stream" ,
-  ".ttz":"application/t-time" ,
-  ".txt":"text/plain" ,
-  ".uls":"text/iuls" ,
-  ".ult":"audio/x-mod" ,
-  ".ustar":"application/x-ustar" ,
-  ".uu":"application/x-uuencode" ,
-  ".uue":"application/x-uuencode" ,
-  ".vcd":"application/x-cdlink" ,
-  ".vcf":"text/x-vcard" ,
-  ".vdo":"video/vdo" ,
-  ".vib":"audio/vib" ,
-  ".viv":"video/vivo" ,
-  ".vivo":"video/vivo" ,
-  ".vmd":"application/vocaltec-media-desc" ,
-  ".vmf":"application/vocaltec-media-file" ,
-  ".vmi":"application/x-dreamcast-vms-info" ,
-  ".vms":"application/x-dreamcast-vms" ,
-  ".vox":"audio/voxware" ,
-  ".vqe":"audio/x-twinvq-plugin" ,
-  ".vqf":"audio/x-twinvq" ,
-  ".vql":"audio/x-twinvq" ,
-  ".vre":"x-world/x-vream" ,
-  ".vrml":"x-world/x-vrml" ,
-  ".vrt":"x-world/x-vrt" ,
-  ".vrw":"x-world/x-vream" ,
-  ".vts":"workbook/formulaone" ,
-  ".wav":"audio/x-wav" ,
-  ".wax":"audio/x-ms-wax" ,
-  ".wbmp":"image/vnd.wap.wbmp" ,
-  ".wcm":"application/vnd.ms-works" ,
-  ".wdb":"application/vnd.ms-works" ,
-  ".web":"application/vnd.xara" ,
-  ".wi":"image/wavelet" ,
-  ".wis":"application/x-InstallShield" ,
-  ".wks":"application/vnd.ms-works" ,
-  ".wm":"video/x-ms-wm" ,
-  ".wma":"audio/x-ms-wma" ,
-  ".wmd":"application/x-ms-wmd" ,
-  ".wmf":"application/x-msmetafile" ,
-  ".wml":"text/vnd.wap.wml" ,
-  ".wmlc":"application/vnd.wap.wmlc" ,
-  ".wmls":"text/vnd.wap.wmlscript" ,
-  ".wmlsc":"application/vnd.wap.wmlscriptc" ,
-  ".wmlscript":"text/vnd.wap.wmlscript" ,
-  ".wmv":"audio/x-ms-wmv" ,
-  ".wmx":"video/x-ms-wmx" ,
-  ".wmz":"application/x-ms-wmz" ,
-  ".wpng":"image/x-up-wpng" ,
-  ".wps":"application/vnd.ms-works" ,
-  ".wpt":"x-lml/x-gps" ,
-  ".wri":"application/x-mswrite" ,
-  ".wrl":"x-world/x-vrml" ,
-  ".wrz":"x-world/x-vrml" ,
-  ".ws":"text/vnd.wap.wmlscript" ,
-  ".wsc":"application/vnd.wap.wmlscriptc" ,
-  ".wv":"video/wavelet" ,
-  ".wvx":"video/x-ms-wvx" ,
-  ".wxl":"application/x-wxl" ,
-  ".x-gzip":"application/x-gzip" ,
-  ".xaf":"x-world/x-vrml" ,
-  ".xar":"application/vnd.xara" ,
-  ".xbm":"image/x-xbitmap" ,
-  ".xdm":"application/x-xdma" ,
-  ".xdma":"application/x-xdma" ,
-  ".xdw":"application/vnd.fujixerox.docuworks" ,
-  ".xht":"application/xhtml+xml" ,
-  ".xhtm":"application/xhtml+xml" ,
-  ".xhtml":"application/xhtml+xml" ,
-  ".xla":"application/vnd.ms-excel" ,
-  ".xlc":"application/vnd.ms-excel" ,
-  ".xll":"application/x-excel" ,
-  ".xlm":"application/vnd.ms-excel" ,
-  ".xls":"application/vnd.ms-excel" ,
-  ".xlsx":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ,
-  ".xlt":"application/vnd.ms-excel" ,
-  ".xlw":"application/vnd.ms-excel" ,
-  ".xm":"audio/x-mod" ,
-  ".xml":"text/plain",
-  ".xml":"application/xml",
-  ".xmz":"audio/x-mod" ,
-  ".xof":"x-world/x-vrml" ,
-  ".xpi":"application/x-xpinstall" ,
-  ".xpm":"image/x-xpixmap" ,
-  ".xsit":"text/xml" ,
-  ".xsl":"text/xml" ,
-  ".xul":"text/xul" ,
-  ".xwd":"image/x-xwindowdump" ,
-  ".xyz":"chemical/x-pdb" ,
-  ".yz1":"application/x-yz1" ,
-  ".z":"application/x-compress" ,
-  ".zac":"application/x-zaurus-zac" ,
-  ".zip":"application/zip" ,
-  ".json":"application/json"
-}
+[参考地址][http://www.w3school.com.cn/media/media_mimeref.asp]
 
 # mongoDB
 
@@ -824,7 +581,7 @@ mongoose.connection.on("disconnected",function(){
 })
 ```
 
-## 插入数据
+## 基本案例
 
 - 连接成功以后，就能管理数据库了。
 - 首先是在数据库中插入数据-----具体操作方法，与之前写的命令一致
@@ -860,12 +617,7 @@ mongoose.connection.on("connected",function(){
 ```
 
 - 可被支持的数据类型
-  - String
-  - Number
-  - Date
-  - Buffer
-  - Boolean
-  - Array
+  String	/	Number	/	Date	/	Buffer	/	Boolean	/	Array:   `type:Array`  `type:[Number]`
 - 插入数据的操作时特殊的：
   - 使用model对象生成数据
   - 数据调用save（）
@@ -873,41 +625,79 @@ mongoose.connection.on("connected",function(){
 
 
 
-## 查询数据
+> **mongoose 的api还是有很多的，这里对于curd列举最实用的api，详细内容自行百度。**
+>
+> 这里列举的，所有增删改查只有`save`是实例方法，其余都是静态方法
 
-- 查询数据
+
+
+## 增加数据
 
 ```javascript
-	User.find({},function(err,data){});
-	User.find({username:{$regex:/g/i}});
-	User.findId({},function(err,data){});
+new User({}).save(function(err){})  //User实例方法，参数只能是对象
+User.create([]/{},function(err){})	//参数可以是数组或者是对象
+```
+
+## 查询数据
+
+```javascript
+	//基础使用
+	User.find({},function(err,data){});//返回值是数组
+	User.findOne({},function(err,data){}) //返回值是对象
+	User.count({},function(err,data){})//返回值是数字
+	
+	//传入复杂条件：（总共十几种用法）	
+	User.find({username:{$regex:/g/i}});//正则
 	User.find({name:"sun"},{name:1,age:0},function(err,data){})
-	User.count({},function(err,num){})
+```
 
-	findOne()
+- 对查询结果进行过滤：排序、限制条数、跳过几条（这里的api也有几十个）
 
-	//回调函数中，得到的是数组形式的数据
+```
+User.find({},function(err,data){}) 				//返回查到的所有文档
+
+User.find({},function(err,data){}).limit(10)	//返回前10条文档
+
+User.find({},function(err,data){}).sort({age:-1}) // 将返回的文档按照age倒序排列
+
+User.find({},function(err,data){}).skip(10)			//跳过前十条
 ```
 
 ## 更新数据
 
 ```javascript
 User.update({查询条件},{更新数据},{配置项},function(err，res){})
-User.update({name:"sunn"},{age:20},{upsert:true,multi:true},function(err,res){
-		if(err){
-			console.log("错误")
-		}else{
-			console.log(res)
-		}
-	})
+
+User.updateOne({},{username:1},function(err){}) 	//将第一条满足条件的文档中的username属性更改为1
+
+User.updateMany({},{username:1},function(err){}) 	//将所有满足条件的文档中的username属性更改为1
+
+//配置项自行百度：可以实现重置查询到的文档
+upsert: <boolean>,
+multi: <boolean>,
 ```
 
 ## 删除数据
 
 ```javascript
-User.remove({查询条件}，function(err,res){})
-findOneAndRemove()
+User.deleteOne({},function(err){})   		//删除第一个满足条件的文档
+User.deleteMany({},function(err){})   		//删除所有满足条件的文档
+
+User.remove({},function(){})
 ```
+
+## 补充：根据`_id`操作
+
+```
+User.findById("",function(err,data){})  	//返回值是对象
+
+User.findByIdAndUpdate("",{}，function(err,data){})  	//更新
+
+User.findByIdAndRemove("",function(err,data){})  	//删除
+
+```
+
+
 
 # express
 
@@ -963,7 +753,7 @@ app.listen(8888,function(){
 | res.send()       |                |                                                              |
 | res.redirect();  | 重定向         |                                                              |
 | res.send()       |                |                                                              |
-| res.render()     |                |                                                              |
+| res.render()     |                | 设置了渲染引擎后可用                                         |
 |                  |                |                                                              |
 |                  |                |                                                              |
 
@@ -1000,11 +790,8 @@ var express = require('express')
 var bodyParser = require('body-parser')
 
 var app = express()
-//配置 body-parser
-//只要加入这个配置，request请求对象上就会多出一个属性：body
-//通过req.body来获取POST请求体的数据
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 // parse application/json
 app.use(bodyParser.json())
@@ -1020,8 +807,6 @@ app.use(express.static("public"))
 //参数为路径   读取文件时使用 public+pathname  作为读取文件的路径
 ```
 
-
-
 ## app.Router
 
 说明：
@@ -1029,19 +814,28 @@ app.use(express.static("public"))
 - 用来代理路由，方便模块化设计
 - 开发时，一个node js文件做一样事，通过引入模块的方式配合使用。
 
-使用方式：
+> 主程序代码：
+>
+
+```javascript
+var express = require('express');
+var router = require("./router/router.js")
+var app = express();
+app.use(router);
+```
+
+> 路由模块代码
 
 ```javascript
 var express = require('express');
 var app = express();
-
-var rouer = app.Router();
-
+var router = express.Router();
 router.get();
 router.post();
-
-app.use(router);
+module.exports = router;
 ```
+
+
 
 将所有的路由都让router代理，然后app调用use使用router中间件。
 
@@ -1369,4 +1163,78 @@ app.listen(8080,function(){
   })
   ```
 
-  
+
+# promise
+
+> 参考文档: [ES6标准入门][http://es6.ruanyifeng.com/]
+
+fs文件操作api都是异步操作，且原生方法没有被promise封装，这里使用使用promise封装fs的文件操作api
+
+> 1.0版本
+
+```javascript
+//使用promise封装异步的文件读取函数
+var p1 =  new Promise(function(resove, reject) {
+        fs.readFile("01.txt", "utf8", function(err, data) {
+            if (err) {
+                reject(err)
+            } else {
+                resove(data)
+            }
+        })
+    })
+//使用promise封装异步的文件读取函数
+var p2 = new Promise(function(resove, reject) {
+        fs.readFile("01.txt", "utf8", function(err, data) {
+            if (err) {
+                reject(err)
+            } else {
+                resove(data)
+            }
+        })
+    })
+//使用.then()获取异步操作的结果  两个回调函数（成功回调，失败回调） 这里没写失败回调
+
+p1
+    .then(function(data){
+    console.log(data)
+    return p2
+})
+    .then(function(data){
+    console.log(data)
+})
+
+
+```
+
+> 稍微封装通用函数 2.0
+
+```javascript
+//使用promise封装通用的函数
+var myReadFile = function(path) {
+    return new Promise(function(resove, reject) {
+        fs.readFile(path, "utf8", function(err, data) {
+            if (err) {
+                reject(err)
+            } else {
+                resove(data)
+            }
+        })
+    })
+}
+//调用函数
+myReadFile("a.txt")
+    .then(function(data){
+    	console.log(data)
+    	return myReadFile("b.txt")
+	})
+	.then(function(data){
+    	console.log(data)
+	})
+```
+
+>  jquery的ajax 和 mongoose 提供的方法都是经过promise 封装过的，可是直接使用.then()
+
+- 1
+	+ 2
+		* 3

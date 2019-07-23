@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>信息展示</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/public/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 main">
+                <h1 class="page-header">学员管理</h2>
+                    <a href="/post.html" class="btn btn-success btn-block">添加新学员</a>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>年龄</th>
+                                    <th>性别</th>
+                                    <th>爱好</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{each users}}
+                                <tr>
+                                    <th class="username">{{$value.username}}</th>
+                                    <th class="age">{{$value.age}}</th>
+                                    <th class="gender">{{$value.gender}}</th>
+                                    <th class="hobbies">{{$value.hobbies}}</th>
+                                    <th class="option">
+                                        <a href="/delete?username={{$value.username}}" type="button" class="btn btn-danger delete">删除</a>
+                                        <a href="/post.html?username={{$value.username}}" type="button" class="btn btn-info update">更新</button>
+                                    </th>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
