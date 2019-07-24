@@ -214,9 +214,9 @@ fs.
 >
 > **注意事项：：：：：：：：**
 >
-> ​	1、 **fs的文件读取路径，被设计为相对于主程序。**
+> ​	1、 **fs的文件读取路径，被设计为相对于主程序。（命令台所在的目录）**
 >
-> ​		**也就是说就算是在其他模块中读取文件，如果路径写的是相对路径，相对的是主程序文件。**
+> ​		**也就是说就算是在其他模块中读取文件，如果路径写的是相对路径，相对的是主程序文件（命令台目录）。**
 >
 > ​	2、**开发中直接使用fs模块的概率很小**
 
@@ -406,7 +406,7 @@ var path = require("path");//处理文件路径
 
 - 模板基础语法：具体的去查api，我就写几个常用的。
 
-```javascript
+```
 //文本输出
 {{value}} //不会编译html
 {{@ value}}//会编译html
@@ -418,6 +418,39 @@ var path = require("path");//处理文件路径
     {{$index}} {{$value}}
 {{/each}}                                 
 ```
+
+```
+//子模板
+{{include("./header.html")}}
+{{include("./header.html",data)}}
+
+//{{@include ...}}
+```
+
+```
+//继承   主模板 layout.html
+
+<header>123</header>
+		<!-- 挖个坑，让孩子去填。 -->
+		{{block "count"}}
+			默认内容
+		{{/block}}
+
+<footer>123</footer>
+
+
+//继承	子模板  01.html
+
+{{extend "./layout.html"}}
+		
+        <!-- 填坑 -->
+        {{block "count"}}
+        自己的内容
+        {{/block}}
+
+```
+
+
 
 - 使用方式：具体查api。我也只写一种，前后台使用方式一样。
 
@@ -859,7 +892,7 @@ app.use('*', function (req, res, next) {
 
 art模板：
 
-```javascript
+```
 //正常使用
 {{age}}
 //判断变量是否存在
@@ -868,18 +901,13 @@ art模板：
 {{/if}}
 
   //循环数据
-  			{{each user}}
-		 		<span>
-		 			index:{{$index}} <br>
-		 			value:{{$value}}
-		 		</span>
-			{{/each}}
-  
- 
-
+  {{each user}}
+      <span>
+          index:{{$index}} <br>
+          value:{{$value}}
+      </span>
+  {{/each}}
 ```
-
-
 
 说明：art-template是一个模板工具，可以实现服务端渲染文件，也可以在客服端渲染数据
 
