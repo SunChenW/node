@@ -52,6 +52,9 @@
   - [静态路由](#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1-1)
   - [解决跨域问题](#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-1)
 - [promise](#promise)
+- [第三方包](#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85)
+  - [密码加密 ：md5  ：使用超级简单](#%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86-md5--%E4%BD%BF%E7%94%A8%E8%B6%85%E7%BA%A7%E7%AE%80%E5%8D%95)
+  - [session:简单使用](#session%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
