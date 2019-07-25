@@ -684,6 +684,20 @@ User.create([]/{},function(err){})	//参数可以是数组或者是对象
 	User.find({name:"sun"},{name:1,age:0},function(err,data){})
 ```
 
+```
+db.col.find(
+   {
+      $or: [
+         {key1: value1}, {key2:value2}
+      ]
+   }
+)
+
+
+```
+
+
+
 - 对查询结果进行过滤：排序、限制条数、跳过几条（这里的api也有几十个）
 
 ```
@@ -733,6 +747,8 @@ User.findByIdAndRemove("",function(err,data){})  	//删除
 
 
 # express
+
+官网很棒：<a href="http://www.expressjs.com.cn/">express官方指南</a>
 
 ## 说明
 
@@ -1263,6 +1279,81 @@ myReadFile("a.txt")
 
 >  jquery的ajax 和 mongoose 提供的方法都是经过promise 封装过的，可是直接使用.then()
 
-- 1
-	+ 2
-		* 3
+> promise的使用有多重使用方式，人老了脑子不好使，我也看不懂就不写了。
+>
+> 这里补充一个你肯定会用到的使用方式
+
+```javascript
+myReadFile("a.txt")
+    .then(function(data){
+    	console.log(data)
+    	return myReadFile("b.txt")
+	})
+	.then(function(data){
+    	console.log(data)
+	})
+    .catch(function(err){
+    	//上边两个异步操作，有一个异常就会执行这里的。
+    	//异常处理可以更加精细，具体的使用方式，自行百度
+	})
+.
+```
+
+
+
+
+
+# 第三方包
+
+## 密码加密 ：md5  ：使用超级简单
+
+```javascript
+// var md5 = require("blueimp-md5");
+// 原始数据
+var data = 123456789
+// 加密之后的数据
+data = md5(data)
+// 可以多次加密
+data = md5(md5(data))
+```
+## session:简单使用
+
+> session与cookie的使用方式差不多，一些区别，这里就不写了，用就得了。
+>
+> session是缓存在服务器端，cookie是存储在浏览器端。
+>
+> 浏览器关闭，或服务器关闭，session会自动清除。
+>
+> 一定要注意：session的获取与设置都是使用`req.session.`
+
+> 个人还是推荐使用WebStotage：localStorage、sessionStrage。存储信息更多，操作更加方便。多几行代码而已..............................................................
+
+- 在主程序中配置
+
+```javascript
+var session = require("express-session")
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+	// 用来加密：值任意写
+  secret: 'keyboard cat',
+  resave: false,
+  // 是否发送默认的总是发送session
+  saveUninitialized: true,
+  // 要求请求是https：测试肯定不能用啊
+  // cookie: { secure: true }
+}))
+```
+
+- 设置session：发送到客户端
+
+```javascript
+req.session.user = user
+//req 原来是没有session属性的，这是包扩展的
+```
+
+- 获取session
+
+```javascript
+var user = req.session.user
+```
