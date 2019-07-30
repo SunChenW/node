@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [ES6](#es6)
+  - [promise](#promise)
+  - [async  await](#async--await)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # ES6
 
 [^特别是说明]: 此笔记是在学习node过程中记录，部分案例使用的node代码。

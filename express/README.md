@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [express](#express)
+  - [说明](#%E8%AF%B4%E6%98%8E)
+  - [概念问题](#%E6%A6%82%E5%BF%B5%E9%97%AE%E9%A2%98)
+  - [基本使用](#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
+  - [request & response](#request--response)
+    - [request](#request)
+    - [response](#response)
+  - [获取get提交的数据](#%E8%8E%B7%E5%8F%96get%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE)
+  - [获取post提交的数据](#%E8%8E%B7%E5%8F%96post%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE)
+  - [静态路由](#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1)
+  - [app.Router](#approuter)
+  - [解决跨域问题](#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98)
+  - [使用art-template模板](#%E4%BD%BF%E7%94%A8art-template%E6%A8%A1%E6%9D%BF)
+- [第三方包](#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85)
+  - [密码加密 ：md5  ：使用超级简单](#%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86-md5--%E4%BD%BF%E7%94%A8%E8%B6%85%E7%BA%A7%E7%AE%80%E5%8D%95)
+  - [session:简单使用](#session%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # express
 
 官网很棒：<a href="http://www.expressjs.com.cn/">express官方指南</a>
