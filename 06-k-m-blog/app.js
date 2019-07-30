@@ -1,37 +1,62 @@
-// 引包
-var express = require("express")
-var bodyParser = require("body-parser")
-var router = require("./router/router.js")
-var session = require("express-session")
+var Koa = require("koa")
+var koaBody = require("koa-body")
+var static = require("koa-static")
+var cors = require("koa2-cors")
+var route = require("koa-route")
+var render = require("koa-art-template")
+var path = require("path")
+var User = require("./model/module.js")
 
-// 创建服务
-var app = express()
+var app = new Koa()
 
-// 配置服务
-app.use("/public",express.static("./public"))
-app.use("/node_modules",express.static("./node_modules"))
+app.use(static(__dirname))
+app.use(koaBody())
+app.use(cors())
+render(app, {
+    root: path.join(__dirname, 'views'),
+    extname: '.html',
+    debug: process.env.NODE_ENV !== 'production'
+});
 
-app.engine("html",require("express-art-template"))
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(route.get("/",async function(ctx) {
 
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-	// 用来加密：值任意写
-  secret: 'keyboard cat',
-  resave: false,
-  // 是否发送默认的总是发送session
-  saveUninitialized: true,
-  // 要求请求是https：测试肯定不能用啊
-  // cookie: { secure: true }
+	var users = await User.find()
+	ctx.render("index.html",{users})
+}))
+
+app.use(route.get("/post.html", function(ctx) {
+	if(ctx.query.username){
+		ctx.render("post.html",{is:true,username:ctx.query.username})
+	}else{
+		ctx.render("post.html")
+	}
+	
+}))
+
+app.use(route.post("/post",async function(ctx){
+	// console.log(ctx.request.body.username)
+	var count = await User.count({username:ctx.request.body.username})
+	// console.log("现有用户数据" + count +"条")
+	if(count==0){
+		await User.create(ctx.request.body)
+	}else{
+		await User.updateOne({username:ctx.request.body.username},ctx.request.body,{upsert:true})
+	}
+	ctx.response.redirect("/")
+}))
+
+app.use(route.get("/delete",async function(ctx){
+	await User.deleteOne({username:ctx.request.query.username},function(err){
+		if(err){
+			ctx.status = 500
+		}else{
+			ctx.response.redirect("/")
+		}
+	})
 }))
 
 
-// 路由
-app.use(router)
-
-// 开启服务
-app.listen(8080,function(){
-	console.log("server is running")
+app.listen(8080, function() {
+    console.log("server is running")
 })

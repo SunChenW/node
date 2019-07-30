@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 // 定义变量存储 mongoDB软件的连接地址
 // var DB_URL =  "mongodb://locahost:27017";
 // mongoose.connect("DB_URL");
-mongoose.connect("mongodb://127.0.0.1:27017/blog");
+mongoose.connect("mongodb://127.0.0.1:27017/curd");
 // 也可以设置解析数据的方式，当然不设置也可以====如果包url不能解析错误就必须设置
 // mongoose.connect("mongodb://127.0.0.1:2701",{ useNewUrlParser: true });
 

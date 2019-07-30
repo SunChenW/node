@@ -695,10 +695,12 @@ User.update({查询条件},{更新数据},{配置项},function(err，res){})
 
 User.updateOne({},{username:1},function(err){}) 	//将第一条满足条件的文档中的username属性更改为1
 
-User.updateMany({},{username:1},function(err){}) 	//将所有满足条件的文档中的username属性更改为1
+User.updateMany({},{username:1},function(err){}) 	//将所有满足条件的文档中的username属性更改为1 
+//在没有设置配置项的情况在，只会更新查询条件
+//需要设置配置项，才能重置整个文档。此时使用 $set，也是可以只更新查询条件
 
 //配置项自行百度：可以实现重置查询到的文档
-upsert: <boolean>,
+upsert: <boolean>, //使用时给true
 multi: <boolean>,
 ```
 

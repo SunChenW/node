@@ -11,6 +11,10 @@
   - [路由代理](#%E8%B7%AF%E7%94%B1%E4%BB%A3%E7%90%86)
   - [静态路由](#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1)
   - [解决跨域问题](#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98)
+- [第三方包](#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85)
+  - [session的使用](#session%E7%9A%84%E4%BD%BF%E7%94%A8)
+  - [art-template](#art-template)
+  - [脚手架](#%E8%84%9A%E6%89%8B%E6%9E%B6)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -70,7 +74,7 @@ app.listen(8888,function(){
 | ctx.url                                                      | 获取请求的url                             |
 | ctx.query                                                    | 获取查询数据（get：对象）                 |
 | ctx.querystring                                              | 获取查询数据（get：查询字符串）           |
-| ctx.body                                                     | 获取查询数据（post）                      |
+| ctx.body（测试位获取，建议使用ctx.request.body）             | 获取查询数据（post）                      |
 |                                                              |                                           |
 | **与response别名一致**                                       | **作用**                                  |
 | ctx.body= “你好”                                             | 设置响应数据(响应体)                      |
@@ -110,7 +114,7 @@ npm i koa-body
 引入:
 
 ```powershell
-var  bodyParser = require('koa-body')
+var  koaBody = require('koa-body')
 ```
 
 配置及使用：
@@ -196,6 +200,7 @@ var router  = require("koa-route")
 var static = require("koa-static")
 var app = new koa()
 // 配置及使用静态路由：路由成功则本次本次服务结束，不会执行其他路由
+// 直接拼接读取:所以请求的url中不能带/public
 app.use(static("./public"))
 //监听端口
 app.listen(8080,function(){
@@ -261,4 +266,103 @@ app.listen(8080,function(){
       console.log("running")
   })
   ```
+
+# 第三方包
+
+## session的使用
+
+- 下载
+
+```shell
+npm install koa-session --save
+```
+
+- 引用
+
+```javascript
+const session = require('koa-session')                      
+```
+
+- 配置（抄的别人的，所以很全面）
+
+```javascript
+app.keys = ['some secret hurr'];
+
+const CONFIG = {
+key: 'koa:sess', //cookie key (default is koa:sess)
+maxAge: 86400000, // cookie 的过期时间 maxAge in ms (default is 1 days)
+overwrite: true, //是否可以 overwrite (默认 default true)
+httpOnly: true, //cookie 是否只有服务器端可以访问 httpOnly or not (default true)
+signed: true, //签名默认 true
+rolling: false, //在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false）
+renew: false, //(boolean) renew session when session is nearly expired,
+};
+
+app.use(session(CONFIG, app));
+```
+
+- 使用
+
+```javascript
+ctx.session.username = 123
+var username = ctx.session.username
+```
+
+## art-template
+
+- 下载
+
+```shell
+npm install --save art-template
+npm install --save koa-art-template
+```
+
+- 引用
+
+```javascript
+const Koa = require('koa');
+const render = require('koa-art-template');
+```
+
+- 配置
+
+```javascript
+render(app, {
+root: path.join(__dirname, 'view'), extname: '.art', debug: process.env.NODE_ENV !== 'production' });
+```
+
+- 使用
+
+```javascript
+app.use(async function (ctx) {
+await ctx.render('user');
+});
+```
+
+## 脚手架
+
+- 下载
+
+```shell
+npm install koa-generator -g
+```
+
+- 使用脚手架搭建项目
+
+```shell
+koa koa_demo                        
+```
+
+- 安装项目依赖
+
+```shell
+cd koa_demo
+npm install
+```
+
+- 启动项目
+
+```shell
+npm start
+```
 
