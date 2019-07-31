@@ -30,6 +30,8 @@
   - [更新数据](#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE)
   - [删除数据](#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE)
   - [补充：根据`_id`操作](#%E8%A1%A5%E5%85%85%E6%A0%B9%E6%8D%AE_id%E6%93%8D%E4%BD%9C)
+- [第三方包](#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85)
+  - [fs.promise](#fspromise)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -723,3 +725,16 @@ User.findByIdAndUpdate("",{}，function(err,data){})  	//更新
 User.findByIdAndRemove("",function(err,data){})  	//删除
 
 ```
+
+# 第三方包
+
+## fs.promise
+
+- 将fs的方法全部扩展为promise方法
+- 下载引用
+
+```
+var fs = require("fs.promised"); //只引入这一个即可
+```
+
+- 使用：还是使用fs调用fs模块的各个方法

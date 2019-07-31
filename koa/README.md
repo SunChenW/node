@@ -15,6 +15,7 @@
   - [session的使用](#session%E7%9A%84%E4%BD%BF%E7%94%A8)
   - [art-template](#art-template)
   - [脚手架](#%E8%84%9A%E6%89%8B%E6%9E%B6)
+  - [koa-router](#koa-router)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -364,5 +365,25 @@ npm install
 
 ```shell
 npm start
+```
+
+## koa-router
+
+- 下载及引用
+
+```javascript
+//获取router实例
+var Router = require("koa-router")
+var router = new Router()
+```
+
+- 配置：老师没讲，默认！！！
+- 使用方式
+
+```javascript
+//router 代理路由
+router.get("/",function(ctx){})
+//将router代理路由挂载到app上
+app.use(router.routes())
 ```
 
