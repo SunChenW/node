@@ -636,6 +636,27 @@ mongoose.connection.on("connected",function(){
   - 数据调用save（）
 - 除了插入数据，其他操作的方法都是model直接调用
 
+```javascript
+var UserSchema = new Schema({
+	email:{
+		type:String,
+		required:true
+	},
+	created_time:{
+		type:Date,
+		// 这里使用Date的静态方法.now(),不能写调用，当存储数据时会自动调用
+		default:Date.now
+	},
+	// 头像
+	gender:{
+		type:Number,
+		// enum：枚举，可选值
+		enum:[-1,0,1],
+		default:-1
+	},
+})
+```
+
 
 
 > **mongoose 的api还是有很多的，这里对于curd列举最实用的api，详细内容自行百度。**
@@ -660,8 +681,8 @@ User.create([]/{},function(err){})	//参数可以是数组或者是对象
 	User.count({},function(err,data){})//返回值是数字
 	
 	//传入复杂条件：（总共十几种用法）	
-	User.find({username:{$regex:/g/i}});//正则
-	User.find({name:"sun"},{name:1,age:0},function(err,data){})
+	User.find({username:{$regex:"a"}});//查询 username 包含 a 的所有数据
+	User.find({name:"sun"},{name:0},function(err,data){}) //查询到的数据 不保留name属性
 ```
 
 ```
